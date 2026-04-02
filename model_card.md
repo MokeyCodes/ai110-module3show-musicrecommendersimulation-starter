@@ -1,110 +1,61 @@
 # 🎧 Model Card: Music Recommender Simulation
 
-## 1. Model Name  
+## 1. Model Name
 
-**Music Matcher**
-
----
-
-## 2. Intended Use  
-
-Describe what your recommender is designed to do and who it is for. 
-
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+**VibeMatcher 1.0**
 
 ---
 
-## 3. How the Model Works  
+## 2. Goal / Task
 
-Explain your scoring approach in simple language.  
-
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+This recommender suggests songs from a small catalog based on a user's preferred genre, mood, energy level, and acoustic preference. It tries to predict which tracks will feel like a good match for the user's current listening vibe.
 
 ---
 
-## 4. Data  
+## 3. Data Used
 
-Describe the dataset the model uses.  
-
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+The model uses 20 songs from `data/songs.csv`. Each song includes genre, mood, energy, tempo, valence, danceability, and acousticness. The catalog has pop, lofi, rock, ambient, jazz, synthwave, and a few other styles. The dataset is small, so it does not cover all musical tastes or large artist diversity.
 
 ---
 
-## 5. Strengths  
+## 4. Algorithm Summary
 
-Where does your system seem to work well  
-
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
+The scoring system starts each song at zero and adds points for matching preferences. It gives extra points for genre matches, mood matches, and closeness to the user's target energy. It also adds a small bonus if the song fits the user's acoustic preference. The songs are then ranked by score and the top results are returned.
 
 ---
 
-## 6. Limitations and Bias 
+## 5. Observed Behavior / Biases
 
-Where the system struggles or behaves unfairly. 
-
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
+The system tends to favor songs that match energy because the energy score is strong. Pop and upbeat tracks appear often for energetic profiles. The model can underweight mood when energy is very close, so a song may rank high even if the mood is not an exact match. Because the dataset is small, it can also repeat the same high-energy songs across different profiles.
 
 ---
 
-## 7. Evaluation  
+## 6. Limitations and Bias
 
-How you checked whether the recommender behaved as expected. 
-
-Prompts:  
-
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
-
-No need for numeric metrics unless you created some.
+This recommender is limited by its small catalog and by how the weights are set. Energy similarity is a very strong signal, which can cause a filter bubble around fast, high-energy songs. Users with mixed preferences, like "high energy but moody," may still see mostly upbeat pop hits. The model also does not use lyrics, artist reputation, or user history, so it can miss important taste signals.
 
 ---
 
-## 8. Future Work  
+## 7. Evaluation Process
 
-Ideas for how you would improve the model next.  
-
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+I tested the system with several user profiles: High-Energy Pop, Chill Lofi, Deep Intense Rock, and High-Energy Sad. I compared the top 5 results for each profile and checked whether the selected songs matched my intuition. I also changed the scoring weights to make energy more important and watched how the rankings shifted.
 
 ---
 
-## 9. Personal Reflection  
+## 8. Intended Use and Non-Intended Use
 
-A few sentences about your experience.  
+This system is designed for classroom exploration and simple music recommendation simulation. It is not intended for real production use or personal music streaming service deployment. It should not be used as a serious playlist engine or to make decisions for a large user audience.
 
-Prompts:  
+---
 
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+## 9. Ideas for Improvement
+
+- Add support for multiple genres and moods in the user profile.
+- Use more song features like lyrics mood, artist similarity, or release year.
+- Add diversity checks so the top results are not all the same style.
+
+---
+
+## 10. Personal Reflection
+
+My biggest learning moment was seeing how much a single weight change can alter the results. The system still felt like a real recommender even though it is very simple. AI tools helped me structure the code and the evaluation, but I had to double-check the math and the ranking logic myself. I was surprised that energy similarity can dominate so quickly and that the model can feel correct for pure cases but less accurate for mixed preferences. If I extended this project, I would add richer user profiles and more song features so the recommendations are more balanced.
