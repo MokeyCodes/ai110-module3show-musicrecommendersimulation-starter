@@ -17,3 +17,5 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 16,Golden Hour,Maple Roads,country,mellow,0.47,84,0.70,0.60,0.74
 17,Neon Carnival,Aura Shift,electronic,playful,0.79,126,0.81,0.88,0.18
 18,Soul Garden,Velvet Dawn,calypso,soulful,0.65,96,0.77,0.72,0.50
+19,Blue Midnight,Velvet Breakers,blues,heartfelt,0.55,92,0.62,0.58,0.73
+20,Salsa Sunset,Caliente Crew,salsa,fiery,0.85,108,0.78,0.82,0.27

@@ -21,11 +21,32 @@ Explain your design in plain language.
 
 Some prompts to answer:
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+This recommender uses a simple content-based scoring system.
+
+Inputs
+- `songs.csv` provides song records with attributes: `genre`, `mood`, `energy`, `tempo_bpm`, `valence`, `danceability`, and `acousticness`.
+- `UserProfile` stores preferences for:
+  - `favorite_genre`
+  - `favorite_mood`
+  - `target_energy`
+  - `likes_acoustic`
+
+Algorithm Recipe
+1. Start each song with `score = 0.0`.
+2. Add `+2.0` points if the song genre matches `favorite_genre`.
+3. Add `+1.0` point if the song mood matches `favorite_mood`.
+4. Compute energy similarity:
+   - `energy_similarity = 1.0 - abs(song.energy - user.target_energy)`
+   - Add `+2.0 * energy_similarity`
+5. Add an acousticness preference bonus:
+   - If `likes_acoustic` is true and `acousticness >= 0.5`, add `+0.5`
+   - If `likes_acoustic` is false and `acousticness <= 0.3`, add `+0.5`
+6. Rank all songs by total score descending and return the top `k`.
+
+Potential Biases
+- This system may over-prioritize genre because genre match has the largest weight.
+- It could ignore great songs that match mood and energy but are in a different genre.
+- It may also favor high-energy songs too strongly if your `target_energy` is near the top of the scale.
 
 - Real world recommendation systems use scoring systems to quantify how close it aligns with a user's preference. Then a ranking system uses the previously scored options and produces a list for the user. My program will prioritize a well crafted scoring system to make sure recommendations are the best it can be.
 
@@ -189,6 +210,7 @@ Examples:
 
 You do not need a numeric metric, but if you used one, explain what it measures.
 
+<img src="assets/screenshot.png" alt="Screenshot" width="600">
 ---
 
 ## 8. Future Work
@@ -210,4 +232,5 @@ A few sentences about what you learned:
 - What surprised you about how your system behaved
 - How did building this change how you think about real music recommenders
 - Where do you think human judgment still matters, even if the model seems "smart"
+
 
