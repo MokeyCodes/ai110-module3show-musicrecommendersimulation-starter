@@ -97,6 +97,31 @@ Use this section to document the experiments you ran. For example:
 - What happened when you added tempo or valence to the score
 - How did your system behave for different types of users
 
+### Stress test profiles
+
+I ran several diverse user profiles to evaluate the recommender's behavior:
+
+- **High-Energy Pop**: `{genre: pop, mood: happy, energy: 0.9, likes_acoustic: False}`
+- **Chill Lofi**: `{genre: lofi, mood: chill, energy: 0.35, likes_acoustic: True}`
+- **Deep Intense Rock**: `{genre: rock, mood: intense, energy: 0.92, likes_acoustic: False}`
+- **High-Energy Sad**: `{genre: pop, mood: moody, energy: 0.9, likes_acoustic: False}`
+
+The top recommendations exposed how the model prioritizes genre and energy similarity, and helped reveal edge cases like conflicting energy/mood preferences.
+
+![High-Energy Pop output](assets/part1.png)
+Figure 1: Terminal output for the High-Energy Pop profile.
+
+![Chill Lofi output](assets/part2.png)
+Figure 2: Terminal output for the Chill Lofi profile.
+
+![Deep Intense Rock output](assets/part3.png)
+Figure 3: Terminal output for the Deep Intense Rock profile.
+
+![High-Energy Sad output](assets/part4.png)
+Figure 4: Terminal output for the High-Energy Sad profile.
+
+You can capture terminal screenshots for these outputs and insert them here as images.
+
 ---
 
 ## Limitations and Risks

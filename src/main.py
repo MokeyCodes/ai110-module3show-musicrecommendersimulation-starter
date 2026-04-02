@@ -16,22 +16,38 @@ def main() -> None:
     songs = load_songs("data/songs.csv")
     print(f"Loaded songs: {len(songs)}")
 
-    # Starter example profile
-    user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
+    profiles = [
+        {
+            "name": "High-Energy Pop",
+            "prefs": {"genre": "pop", "mood": "happy", "energy": 0.9, "likes_acoustic": False},
+        },
+        {
+            "name": "Chill Lofi",
+            "prefs": {"genre": "lofi", "mood": "chill", "energy": 0.35, "likes_acoustic": True},
+        },
+        {
+            "name": "Deep Intense Rock",
+            "prefs": {"genre": "rock", "mood": "intense", "energy": 0.92, "likes_acoustic": False},
+        },
+        {
+            "name": "High-Energy Sad",
+            "prefs": {"genre": "pop", "mood": "moody", "energy": 0.9, "likes_acoustic": False},
+        },
+    ]
 
-    recommendations = recommend_songs(user_prefs, songs, k=5)
+    for profile in profiles:
+        print(f"\n=== Profile: {profile['name']} ===")
+        print(f"Preferences: {profile['prefs']}\n")
+        recommendations = recommend_songs(profile["prefs"], songs, k=5)
 
-    print("\nTop recommendations:\n")
-    for rec in recommendations:
-        # You decide the structure of each returned item.
-        # A common pattern is: (song, score, reasons)
-        song, score, reasons = rec
-        print(f"Title: {song['title']}")
-        print(f"Score: {score:.2f}")
-        print("Reasons:")
-        for reason in reasons:
-            print(f"  - {reason}")
-        print()
+        for rec in recommendations:
+            song, score, reasons = rec
+            print(f"Title: {song['title']}")
+            print(f"Score: {score:.2f}")
+            print("Reasons:")
+            for reason in reasons:
+                print(f"  - {reason}")
+            print()
 
 
 if __name__ == "__main__":
