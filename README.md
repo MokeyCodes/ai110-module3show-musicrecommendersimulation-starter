@@ -2,53 +2,33 @@
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
-
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-Replace this paragraph with your own summary of what your version does.
+This version reads songs from `data/songs.csv` and turns each track into a score based on a user's stated taste. It uses genre, mood, energy, and acoustic preference to rank songs, then prints the top matches. The goal is to show how a small content-based recommender can work and to test how weights affect what the system chooses.
 
 ---
 
 ## How The System Works
 
-Explain your design in plain language.
-
-Some prompts to answer:
-
-This recommender uses a simple content-based scoring system.
+This recommender uses a content-based scoring system built from song metadata and the user's preferences.
 
 Inputs
-- `songs.csv` provides song records with attributes: `genre`, `mood`, `energy`, `tempo_bpm`, `valence`, `danceability`, and `acousticness`.
-- `UserProfile` stores preferences for:
-  - `favorite_genre`
-  - `favorite_mood`
-  - `target_energy`
-  - `likes_acoustic`
+- `songs.csv` provides song metadata like `genre`, `mood`, `energy`, `tempo_bpm`, `valence`, `danceability`, and `acousticness`.
+- `main.py` defines profile dictionaries for different users, such as High-Energy Pop and Chill Lofi.
 
-Algorithm Recipe
-1. Start each song with `score = 0.0`.
-2. Add `+2.0` points if the song genre matches `favorite_genre`.
-3. Add `+1.0` point if the song mood matches `favorite_mood`.
-4. Compute energy similarity:
-   - `energy_similarity = 1.0 - abs(song.energy - user.target_energy)`
-   - Add `+2.0 * energy_similarity`
-5. Add an acousticness preference bonus:
-   - If `likes_acoustic` is true and `acousticness >= 0.5`, add `+0.5`
-   - If `likes_acoustic` is false and `acousticness <= 0.3`, add `+0.5`
-6. Rank all songs by total score descending and return the top `k`.
+What it does
+- Loads each song from CSV into memory.
+- Scores each song for the user by comparing genre, mood, energy closeness, and acoustic preference.
+- Ranks songs by total score and returns the top `k`.
+
+Why it works
+- A genre match adds a big boost.
+- A mood match adds a smaller boost.
+- Energy closeness is calculated by how near the song's energy is to the user's target energy.
+- Acoustic preference is a small bonus that helps pick more acoustic or more produced tracks.
 
 Potential Biases
-- This system may over-prioritize genre because genre match has the largest weight.
-- It could ignore great songs that match mood and energy but are in a different genre.
-- It may also favor high-energy songs too strongly if your `target_energy` is near the top of the scale.
-
-- Real world recommendation systems use scoring systems to quantify how close it aligns with a user's preference. Then a ranking system uses the previously scored options and produces a list for the user. My program will prioritize a well crafted scoring system to make sure recommendations are the best it can be.
+- Genre still has a strong influence, so the system can favor songs from the same style.
+- Energy has become more important after experiments, which means the system now prefers songs that feel right in intensity even if the mood is slightly off.
+- With a small dataset, the same songs can appear for multiple profiles, so diversity is limited.
 
 You can include a simple diagram or bullet list if helpful.
 
@@ -121,34 +101,20 @@ Figure 3: Terminal output for the Deep Intense Rock profile.
 ![High-Energy Sad output](assets/part4.png)
 Figure 4: Terminal output for the High-Energy Sad profile.
 
-You can capture terminal screenshots for these outputs and insert them here as images.
 
 ---
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
-
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+This recommender is built on a tiny catalog, so it cannot represent many musical tastes. It also gives high weight to energy and genre, which can make the same fast pop songs appear for multiple profiles. The system does not understand lyrics, artist popularity, or user listening history, so it is only a rough approximation of real music recommendations.
 
 ---
 
 ## Reflection
 
-Read and complete `model_card.md`:
+I learned that a very simple scoring system can still feel like a recommendation engine when it uses genre, mood, and energy together. The biggest surprise was how much the energy score changes the output: once energy was made more important, the model started favoring fast songs even when the mood was not an exact match.
 
-[**Model Card**](model_card.md)
-
-Write 1 to 2 paragraphs here about what you learned:
-
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+Using AI tools helped structure the code and suggest logic, but I had to double-check the actual math and ranking myself. A simple algorithm can still seem smart because it matches the strongest signals in the data, but it can also be wrong when a user's preferences are mixed or contradictory.
 
 
 ---
