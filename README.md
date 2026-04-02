@@ -27,6 +27,8 @@ Some prompts to answer:
 - How does your `Recommender` compute a score for each song
 - How do you choose which songs to recommend
 
+- Real world recommendation systems use scoring systems to quantify how close it aligns with a user's preference. Then a ranking system uses the previously scored options and produces a list for the user. My program will prioritize a well crafted scoring system to make sure recommendations are the best it can be.
+
 You can include a simple diagram or bullet list if helpful.
 
 ---

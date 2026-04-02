@@ -9,3 +9,11 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
 9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
 10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+11,Midnight Sonata,Blue Pewter,classical,dreamy,0.30,64,0.72,0.40,0.92
+12,Backroad Sunrise,Sage Wilder,folk,nostalgic,0.50,98,0.68,0.55,0.79
+13,City Pulse,Crimson Loop,hip hop,energetic,0.88,104,0.65,0.91,0.12
+14,Desert Flame,Iron Throne,metal,dramatic,0.95,142,0.32,0.55,0.03
+15,Island Breeze,Rasta Wave,reggae,laid-back,0.58,88,0.80,0.67,0.65
+16,Golden Hour,Maple Roads,country,mellow,0.47,84,0.70,0.60,0.74
+17,Neon Carnival,Aura Shift,electronic,playful,0.79,126,0.81,0.88,0.18
+18,Soul Garden,Velvet Dawn,calypso,soulful,0.65,96,0.77,0.72,0.50
